@@ -5,11 +5,17 @@ from django.views.generic import TemplateView
 
 from django.contrib import admin
 
+from core.views import ProfileView
+
 
 urlpatterns = patterns("",
+
     url(r"^$", TemplateView.as_view(template_name="homepage.html"), name="home"),
     url(r"^admin/", include(admin.site.urls)),
     url(r"^account/", include("account.urls")),
+    url(r"^", include("core.urls")),
+    url(r"^(?P<username>[a-zA-Z0-9_]+)/$", ProfileView.as_view(),
+        name="user-profile"),
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

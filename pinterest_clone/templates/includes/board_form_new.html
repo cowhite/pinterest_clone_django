@@ -1,0 +1,6 @@
+
+<form action="{% url 'new-board' %}" method="post">
+  {% csrf_token %}
+  {{ board_form.as_p }}
+  <input type="submit" name="{{ board_html_name }}" value="Add">
+</form>

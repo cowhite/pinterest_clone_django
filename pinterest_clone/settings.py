@@ -132,6 +132,8 @@ INSTALLED_APPS = [
 
     # project
     "pinterest_clone",
+    "core",
+    "util",
 ]
 
 # A sample logging configuration. The only tangible logging
