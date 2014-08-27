@@ -29,7 +29,7 @@ class BoardFormView(FormView):
         return context
 
     def form_valid(self, form):
-        m = form.save()
+        m = form.save(self.request.user)
         messages.success(self.request, "Board '%s' created successfully" % m.name)
         return super(BoardFormView, self).form_valid(form)
 
