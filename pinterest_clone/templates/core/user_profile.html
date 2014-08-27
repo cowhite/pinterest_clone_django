@@ -9,6 +9,17 @@
 {% block banner %}
 <button class="btn btn-primary" id="add-board" data-toggle="modal" data-target="#new-board-modal">Add board</button>
 
+<h3>Boards</h3>
+<div class="boards">
+    {% for board in boards %}
+        <div class="board">
+            <a href="{% url 'user-board' profile_user.username board.slug %}">
+                <h3> {{ board.name }} </h3>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+
 <div class="modal fade" id="new-board-modal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -29,7 +40,6 @@
 {% endblock %}
 
 {% block extra_script %}
-<script type="text/javascript" src="{{ STATIC_URL }}pinterest_clone/js/user_profile.js"></script>
-
+    <script type="text/javascript" src="{{ STATIC_URL }}pinterest_clone/js/user_profile.js"></script>
 {% endblock %}
 

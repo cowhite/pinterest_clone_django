@@ -6,6 +6,7 @@ from django.views.generic.edit import FormView
 from django.shortcuts import render, get_object_or_404
 
 from .forms import BoardForm
+from .models import Board
 
 class ProfileView(TemplateView):
     template_name = "core/user_profile.html"
@@ -13,6 +14,8 @@ class ProfileView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
         profile_user = get_object_or_404(User, username=kwargs["username"])
+        context['profile_user'] = profile_user
+        context['boards'] = profile_user.board_set.all()
         context['board_form'] = BoardForm()
         return context
 
@@ -35,3 +38,13 @@ class BoardFormView(FormView):
 
     def get_success_url(self):
         return reverse("user-profile", args=[self.request.user.username])
+
+
+class BoardView(TemplateView):
+    template_name = "core/user_board.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(BoardView, self).get_context_data(**kwargs)
+        context['board'] = get_object_or_404(Board, slug=kwargs['board_slug'])
+        return context
+

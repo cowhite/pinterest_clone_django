@@ -1,0 +1,12 @@
+{% extends "banner_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Board" %}{% endblock %}
+
+{% block body_class %}user-board{% endblock %}
+
+{% block banner %}
+    {{ board }}
+{% endblock %}
+
