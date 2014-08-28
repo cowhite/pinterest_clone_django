@@ -1,0 +1,6 @@
+
+<form action="{% url 'new-pin' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ pin_form.as_p }}
+  <input type="submit" name="{{ pin_html_name }}" value="Add Pin">
+</form>

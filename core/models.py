@@ -19,3 +19,13 @@ class BoardCategory(Slugged):
     class Meta:
         abstract = False
 
+
+class Pin(models.Model):
+    created_by = models.ForeignKey(User)
+    board = models.ForeignKey(Board)
+    image = models.ImageField(upload_to="pins")
+    description = models.TextField()
+
+    def __unicode__(self):
+        return u"%s - %s" % (self.board, self.description)
+
