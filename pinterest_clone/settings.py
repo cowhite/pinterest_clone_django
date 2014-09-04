@@ -70,6 +70,7 @@ STATICFILES_DIRS = [
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    'dajaxice.finders.DajaxiceFinder',
 ]
 
 # Make this unique, and don't share it with anybody.
@@ -79,6 +80,7 @@ SECRET_KEY = "sy@%p#jv82b&^3sv#6x3(_1vf8f(grfbw684^=%%!9j%*w6^h("
 TEMPLATE_LOADERS = [
     "django.template.loaders.filesystem.Loader",
     "django.template.loaders.app_directories.Loader",
+    'django.template.loaders.eggs.Loader',
 ]
 
 TEMPLATE_CONTEXT_PROCESSORS = [
@@ -129,6 +131,8 @@ INSTALLED_APPS = [
     "account",
     "eventlog",
     "metron",
+    
+    "dajaxice",
 
     # project
     "pinterest_clone",

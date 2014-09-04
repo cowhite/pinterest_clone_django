@@ -1,6 +1,8 @@
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.contenttypes.models import ContentType
+from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
 from django.shortcuts import render, get_object_or_404
@@ -69,4 +71,6 @@ class BoardView(TemplateView):
         context['board'] = get_object_or_404(Board, slug=kwargs['board_slug'])
         context['pin_form'] = PinForm()
         return context
+
+
 

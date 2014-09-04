@@ -1,6 +1,7 @@
 {% extends "banner_base.html" %}
 
 {% load i18n %}
+{% load core_tags %}
 
 {% block head_title %}{% trans "Profile" %}{% endblock %}
 
@@ -13,9 +14,11 @@
 <div class="boards">
     {% for board in boards %}
         <div class="board">
-            <a href="{% url 'user-board' profile_user.username board.slug %}">
+            <div href="{% url 'user-board' profile_user.username board.slug %}">
                 <h3> {{ board.name }} </h3>
-            </a>
+                {% is_following user board.get_content_type.id board.id %}
+
+            </div>
         </div>
     {% endfor %}
 </div>

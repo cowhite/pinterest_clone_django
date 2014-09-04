@@ -14,4 +14,7 @@ urlpatterns = patterns("core.views",
     url(r"^(?P<username>[a-zA-Z0-9_]+)/(?P<board_slug>[a-zA-Z0-9_]+)/$",
         BoardView.as_view(),
         name="user-board"),
+    #url(r"^follow/(?P<content_type_id>\d+)/(?P<object_id>\d+)$",
+        #"follow",
+        #name="follow"),
 )

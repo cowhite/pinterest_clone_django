@@ -1,4 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.contenttypes.models import ContentType
 
 def unique_slug(queryset, slug_field, slug):
     """
@@ -58,3 +59,9 @@ def base_concrete_model(abstract, instance):
         if issubclass(cls, abstract) and not cls._meta.abstract:
             return cls
     return instance.__class__
+
+def content_type_object(content_type_id, object_id):
+    content_type = ContentType.objects.get(id=content_type_id)
+    content_object = content_type.model_class().objects.get(id=object_id)
+    return content_type, content_object
+
