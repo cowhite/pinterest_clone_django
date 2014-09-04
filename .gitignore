@@ -55,3 +55,6 @@ docs/_build/
 #db
 *.sqlite3
 dev.db
+
+#media
+pinterest_clone/site_media
