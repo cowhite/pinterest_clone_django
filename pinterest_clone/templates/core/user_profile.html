@@ -16,8 +16,9 @@
         <div class="board">
             <div href="{% url 'user-board' profile_user.username board.slug %}">
                 <h3> {{ board.name }} </h3>
-                {% is_following user board.get_content_type.id board.id %}
-
+                {% if user != profile_user %}
+                  {% is_following user board.get_content_type.id board.id %}
+                {% endif %}
             </div>
         </div>
     {% endfor %}
