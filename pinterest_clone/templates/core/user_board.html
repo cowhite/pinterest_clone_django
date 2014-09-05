@@ -1,6 +1,7 @@
 {% extends "banner_base.html" %}
 
 {% load i18n %}
+{% load core_tags %}
 
 {% block head_title %}{% trans "Board" %}{% endblock %}
 
@@ -12,7 +13,7 @@
 {% if user == profile_user %}
   <button class="btn btn-primary" id="add-pin" data-toggle="modal" data-target="#new-pin-modal">Add a pin</button>
 {% else %}
-    {% include "includes/follow.html" %}
+    {% include "includes/follow.html" with user=user content_type=board|content_type object=board %}
 {% endif %}
 
 <div class="modal fade" id="new-pin-modal">

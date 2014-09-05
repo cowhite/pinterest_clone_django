@@ -2,7 +2,7 @@
 
 {% if user.is_authenticated %}
     {% if user != profile_user %}
-      {% is_following user board.get_content_type.id board.id %}
+      {% is_following user object %}
     {% endif %}
 {% else %}
 <a href="{% url 'account_login' %}?next={{ request.get_full_path }}" class="btn btn-primary" >Follow</a>

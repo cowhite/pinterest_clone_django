@@ -7,7 +7,7 @@ $(document).ready(function() {
 follow_callback = function(res) {
   var $btn, new_follow_dajax, new_unfollow_dajax;
   console.log(res);
-  $btn = $("#follow-board-" + res.object_id);
+  $btn = $("#follow-" + res.content_type_id + "-" + res.object_id);
   if (res.increment === 1) {
     $btn.removeClass("btn-primary").addClass("btn-danger");
     new_unfollow_dajax = $btn.attr("onclick");

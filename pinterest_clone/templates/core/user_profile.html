@@ -1,6 +1,7 @@
 {% extends "banner_base.html" %}
 
 {% load i18n %}
+{% load core_tags %}
 
 {% block head_title %}{% trans "Profile" %}{% endblock %}
 
@@ -8,6 +9,9 @@
 
 {% block banner %}
 <button class="btn btn-primary" id="add-board" data-toggle="modal" data-target="#new-board-modal">Add board</button>
+{% with user=user object=profile_user %}
+    {% include "includes/follow.html" %}
+{% endwith %}
 
 <h3>Boards</h3>
 <div class="boards">
@@ -15,7 +19,9 @@
         <div class="board">
             <div href="{% url 'user-board' profile_user.username board.slug %}">
                 <h3> {{ board.name }} </h3>
-                {% include "includes/follow.html" %}
+                {% with user=user object=board %}
+                    {% include "includes/follow.html" %}
+                {% endwith %}
             </div>
         </div>
     {% endfor %}

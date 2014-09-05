@@ -10,6 +10,7 @@ def follow(request, content_type_id, object_id):
         res['increment'] = 1
     else:
         res['increment'] = 0
+    res['content_type_id'] = content_type_id
     res['object_id'] = object_id
     return simplejson.dumps(res)
 
@@ -21,5 +22,6 @@ def unfollow(request, content_type_id, object_id):
         res['increment'] = -1
     else:
         res['increment'] = 0
+    res['content_type_id'] = content_type_id
     res['object_id'] = object_id
     return simplejson.dumps(res)

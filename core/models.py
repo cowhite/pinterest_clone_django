@@ -70,6 +70,9 @@ def is_following(self, content_type_id, object_id):
     except Follow.DoesNotExist:
         return False
 
+def get_content_type(self):
+    return ContentType.objects.get(app_label="core", name="board")
+
 
 User.add_to_class("follow", follow)
 User.add_to_class("unfollow", unfollow)
