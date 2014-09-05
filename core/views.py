@@ -68,6 +68,8 @@ class BoardView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(BoardView, self).get_context_data(**kwargs)
+        profile_user = get_object_or_404(User, username=kwargs["username"])
+        context['profile_user'] = profile_user
         context['board'] = get_object_or_404(Board, slug=kwargs['board_slug'])
         context['pin_form'] = PinForm()
         return context

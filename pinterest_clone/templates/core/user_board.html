@@ -1,6 +1,7 @@
 {% extends "banner_base.html" %}
 
 {% load i18n %}
+{% load core_tags %}
 
 {% block head_title %}{% trans "Board" %}{% endblock %}
 
@@ -8,7 +9,12 @@
 
 {% block banner %}
 <h1>{{ board }}</h1>
-<button class="btn btn-primary" id="add-pin" data-toggle="modal" data-target="#new-pin-modal">Add a pin</button>
+
+{% if user == profile_user %}
+  <button class="btn btn-primary" id="add-pin" data-toggle="modal" data-target="#new-pin-modal">Add a pin</button>
+{% else %}
+  {% is_following user board.get_content_type.id board.id %}
+{% endif %}
 
 <div class="modal fade" id="new-pin-modal">
   <div class="modal-dialog">
@@ -29,3 +35,6 @@
 </div><!-- /.modal -->
 {% endblock %}
 
+{% block extra_script %}
+    <script type="text/javascript" src="{{ STATIC_URL }}pinterest_clone/js/follow.js"></script>
+{% endblock %}

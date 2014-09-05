@@ -9,11 +9,13 @@ follow_callback = (res) ->
     new_unfollow_dajax = $btn.attr "onclick"
     $btn.attr("onclick", $btn.attr("follow_dajax"))
     $btn.attr("follow_dajax", new_unfollow_dajax)
+    $btn.attr "value", "Unfollow"
   else if res.increment is -1
     $btn.removeClass("btn-danger").addClass "btn-primary"
     new_follow_dajax = $btn.attr "onclick"
     $btn.attr("onclick", $btn.attr("follow_dajax"))
     $btn.attr("follow_dajax", new_follow_dajax)
+    $btn.attr "value", "Follow"
   else
     window.location.reload()
 
