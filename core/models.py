@@ -4,7 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
 from util.models import Slugged
-from util.utils import content_type_object
+from util.utils import content_type_object, get_content_type
 
 class Board(Slugged):
     description = models.TextField(null=True, blank=True)
@@ -46,21 +46,33 @@ class Follow(models.Model):
 #model methods for User
 
 def follow(self, content_type_id, object_id):
-    content_type_object(content_type_id, object_id)
+    content_type, content_object = content_type_object(content_type_id, object_id)
 
     obj, created = Follow.objects.get_or_create(followed_by=self, content_type_id=content_type_id, object_id=object_id)
-    return created
+
+    #If a user follows a user, follow all his boards
+    if content_type.model_class() is User:
+        for board in content_object.board_set.all():
+            self.follow(get_content_type(board).id, board.id)
+    return created, content_type, content_object
 
 def unfollow(self, content_type_id, object_id):
-    content_type_object(content_type_id, object_id)
+    content_type, content_object = content_type_object(content_type_id, object_id)
+
+    #If a user unfollows a user, unfollow all his boards
+    if content_type.model_class() is User:
+        for board in content_object.board_set.all():
+            self.unfollow(get_content_type(board).id, board.id)
     try:
         obj = Follow.objects.get(followed_by=self, content_type_id=content_type_id, object_id=object_id)
         obj.delete()
         if obj.id:
-            return False
-        return True
+            return False, content_type, content_object
+        return True, content_type, content_object
     except Follow.DoesNotExist:
-        return False
+        return False, content_type, content_object
+
+
 
 def is_following(self, content_type_id, object_id):
     content_type_object(content_type_id, object_id)
@@ -69,9 +81,6 @@ def is_following(self, content_type_id, object_id):
         return True
     except Follow.DoesNotExist:
         return False
-
-def get_content_type(self):
-    return ContentType.objects.get(app_label="core", name="board")
 
 
 User.add_to_class("follow", follow)

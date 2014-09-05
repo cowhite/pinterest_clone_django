@@ -3,6 +3,9 @@ $(document).ready ->
 
 follow_callback = (res) ->
   console.log res
+  if res.content_type_name is "user"
+    window.location.reload()
+  
   $btn = $("#follow-#{res.content_type_id}-#{res.object_id}")
   if res.increment is 1
     $btn.removeClass("btn-primary").addClass "btn-danger"

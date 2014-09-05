@@ -65,3 +65,7 @@ def content_type_object(content_type_id, object_id):
     content_object = content_type.model_class().objects.get(id=object_id)
     return content_type, content_object
 
+def get_content_type(instance):
+    if not instance:
+        return False
+    return ContentType.objects.get_for_model(instance)

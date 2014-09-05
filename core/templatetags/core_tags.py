@@ -3,11 +3,13 @@ from django import template
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 
+from util.utils import get_content_type
+
 register = template.Library()
 
 @register.inclusion_tag("inclusion_tags/is_following.html")
 def is_following(user, object):
-    content_type_obj = content_type(object)
+    content_type_obj = get_content_type(object)
     return {
                 "user": user,
                 "content_type": content_type_obj,
@@ -18,7 +20,5 @@ def is_following(user, object):
 
 @register.filter
 def content_type(instance):
-    if not instance:
-        return False
-    return ContentType.objects.get_for_model(instance)
+    return get_content_type(instance)
 
