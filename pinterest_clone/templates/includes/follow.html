@@ -1,0 +1,9 @@
+{% load core_tags %}
+
+{% if user.is_authenticated %}
+    {% if user != profile_user %}
+      {% is_following user board.get_content_type.id board.id %}
+    {% endif %}
+{% else %}
+<a href="{% url 'account_login' %}?next={{ request.get_full_path }}" class="btn btn-primary" >Follow</a>
+{% endif %}

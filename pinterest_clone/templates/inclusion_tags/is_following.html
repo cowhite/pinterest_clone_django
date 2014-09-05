@@ -1,6 +1,7 @@
 
 {% if is_following %}
-<input type="button" id="follow-board-{{ object_id }}" class="btn btn-danger" follow_dajax="Dajaxice.core.follow(follow_callback, { 'content_type_id': {{ content_type_id }}, 'object_id': {{ object_id }} })" onclick="Dajaxice.core.unfollow(follow_callback, { 'content_type_id': {{ content_type_id }}, 'object_id': {{ object_id }} })" value="Unfollow" />
+    <input type="button" id="follow-board-{{ object_id }}" class="btn btn-danger" follow_dajax="Dajaxice.core.follow(follow_callback, { 'content_type_id': {{ content_type_id }}, 'object_id': {{ object_id }} })" onclick="Dajaxice.core.unfollow(follow_callback, { 'content_type_id': {{ content_type_id }}, 'object_id': {{ object_id }} })" value="Unfollow" />
 {% else %}
-<input type="button" id="follow-board-{{ object_id }}" class="btn btn-primary" follow_dajax="Dajaxice.core.unfollow(follow_callback, { 'content_type_id': {{ content_type_id }}, 'object_id': {{ object_id }} })" onclick="Dajaxice.core.follow(follow_callback, { 'content_type_id': {{ content_type_id }}, 'object_id': {{ object_id }} })" value="Follow" />
+    <input type="button" id="follow-board-{{ object_id }}" class="btn btn-primary" follow_dajax="Dajaxice.core.unfollow(follow_callback, { 'content_type_id': {{ content_type_id }}, 'object_id': {{ object_id }} })" onclick="Dajaxice.core.follow(follow_callback, { 'content_type_id': {{ content_type_id }}, 'object_id': {{ object_id }} })" value="Follow" />
 {% endif %}
+
