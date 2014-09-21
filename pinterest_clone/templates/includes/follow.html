@@ -2,8 +2,8 @@
 
 {% if user.is_authenticated %}
     {% if user != profile_user %}
-      {% is_following user object %}
+      {% is_following user object col %}
     {% endif %}
 {% else %}
-<a href="{% url 'account_login' %}?next={{ request.get_full_path }}" class="btn btn-primary" >Follow</a>
+<a href="{% url 'account_login' %}?next={{ request.get_full_path }}" class="btn btn-primary btn-block" >Follow</a>
 {% endif %}

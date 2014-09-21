@@ -59,3 +59,5 @@ dev.db
 #media
 pinterest_clone/site_media
 local_settings.py
+
+node_modules/

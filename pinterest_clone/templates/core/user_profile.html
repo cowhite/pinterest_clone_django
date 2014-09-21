@@ -1,4 +1,4 @@
-{% extends "banner_base.html" %}
+{% extends "site_base.html" %}
 
 {% load i18n %}
 {% load core_tags %}
@@ -7,25 +7,46 @@
 
 {% block body_class %}user-profile{% endblock %}
 
-{% block banner %}
+{% block body %}
 <button class="btn btn-primary" id="add-board" data-toggle="modal" data-target="#new-board-modal">Add board</button>
 {% with user=user object=profile_user %}
     {% include "includes/follow.html" %}
 {% endwith %}
 
 <h3>Boards</h3>
-<div class="boards">
+<div class="boards row">
     {% for board in boards %}
-        <div class="board">
-            <div href="{% url 'user-board' profile_user.username board.slug %}">
-                <h3> {{ board.name }} </h3>
-                {% with user=user object=board %}
-                    {% include "includes/follow.html" %}
-                {% endwith %}
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <div class="board">
+              <a href="{% url 'user-board' profile_user.username board.slug %}">
+                  <h3 class='title'> {{ board.name }} </h3>
+              </a>
+                  
+              <a href="{% url 'user-board' profile_user.username board.slug %}">
+                  
+                  {% for pin in board.pin_set.all %}
+                      {% if forloop.counter == 1 %}
+                          <div class="pin-cover"> <img src="{{ pin.image.url }}" class='pin-image img img-responsive'/> </div>
+                          {% if not forloop.last %} <div class="small-pins"> {% endif %}
+                      {% else %}
+                           <img src="{{ pin.image.url }}" class="pin-image  img img-responsive" />
+                          {% if forloop.last %} </div> {% endif %}
+
+                      {% endif %}
+                  {% endfor %}
+                  {% if not board.pin_set.count %}
+                     <h2>No pins</h2>
+                  {% endif %}
+              </a>
+                  {% with user=user object=board col=True %}
+                      {% include "includes/follow.html" %}
+                  {% endwith %}
             </div>
         </div>
     {% endfor %}
+    <div class="clearfix"></div>
 </div>
+
 
 <div class="modal fade" id="new-board-modal">
   <div class="modal-dialog">
