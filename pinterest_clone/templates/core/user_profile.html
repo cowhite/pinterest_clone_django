@@ -1,13 +1,43 @@
 {% extends "site_base.html" %}
 
 {% load i18n %}
-{% load core_tags %}
+{% load core_tags avatar_tags %}
 
 {% block head_title %}{% trans "Profile" %}{% endblock %}
 
 {% block body_class %}user-profile{% endblock %}
 
 {% block body %}
+<div id="user-details">
+  <div class="pull-left">
+    <div>
+      <div class="pull-right name">{{  profile_user.first_name  }}</div>
+      <div class="pull-left">
+        <div id="avatar-block">
+          {% if user == profile_user %}
+            <div id="change-avatar">
+              <a  href="{% url 'avatar_change' %}" class="btn">Change</a>
+            </div>
+          {% endif %}
+          <div id="avatar-image">
+            {% avatar profile_user 130 %}
+          </div>
+        </div>
+
+      </div>
+    </div> 
+  </div>
+  {% if user == profile_user %}
+  <div class="pull-right">
+  <a href="{% url 'account_settings' %}" class="btn btn-primary">Edit profile</a>
+  </div>
+  {% endif %}
+  <div class="clearfix"></div>
+
+</div>
+
+<div class="clearfix"></div>
+
 <button class="btn btn-primary" id="add-board" data-toggle="modal" data-target="#new-board-modal">Add board</button>
 {% with user=user object=profile_user %}
     {% include "includes/follow.html" %}

@@ -1,6 +1,9 @@
+@panel_bg: #fff;
+
 body {
   background-color: #eee;
 }
+
 
 .board {
   min-height: 280px;
@@ -36,7 +39,7 @@ body {
 #pins {
   .pin {
     .pin-content {
-      background-color: #fff;
+      background-color: @panel_bg;
       border-radius: 7px;
 
     }
@@ -80,5 +83,34 @@ body {
 }
 
 
+#user-details {
+  background-color: @panel_bg;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 30px;
 
+  .name {
+    font-weight: bold;
+    margin-left: 30px;
+  }
+
+  #change-avatar {
+    width: 180px;
+    height: 180px;
+    display: none;
+    position: absolute;
+    margin-left: -23px;
+    margin-top: -23px;
+    opacity: 0.3;
+    background-color: rgb(144, 144, 221);
+
+    a {
+      margin-top: 10%;
+      margin-left: 30%;
+      background-color: white;
+    }
+  }
+
+
+}
 

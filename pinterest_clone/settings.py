@@ -131,11 +131,10 @@ INSTALLED_APPS = [
     "account",
     "eventlog",
     "metron",
-    
     "dajaxice",
+    "avatar",    
 
     # project
-    "pinterest_clone",
     "core",
     "util",
 ]

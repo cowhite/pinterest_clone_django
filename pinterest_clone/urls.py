@@ -19,9 +19,12 @@ urlpatterns = patterns("",
     url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
     
     url(r"^account/", include("account.urls")),
-    url(r"^", include("core.urls")),
     url(r"^(?P<username>[a-zA-Z0-9_]+)/$", ProfileView.as_view(),
         name="user-profile"),
+
+    url(r'^avatar/', include('avatar.urls')),
+    url(r"^", include("core.urls")),
+    
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
