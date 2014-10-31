@@ -8,12 +8,13 @@ from django.views.generic import TemplateView
 from dajaxice.core import dajaxice_autodiscover, dajaxice_config
 dajaxice_autodiscover()
 
-from core.views import ProfileView
+from core.views import ProfileView, HomeView
 
 
 urlpatterns = patterns("",
 
-    url(r"^$", TemplateView.as_view(template_name="homepage.html"), name="home"),
+    #url(r"^$", TemplateView.as_view(template_name="homepage.html"), name="home"),
+    url(r"^$", HomeView.as_view(), name="home"),
     url(r"^admin/", include(admin.site.urls)),
     url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
     

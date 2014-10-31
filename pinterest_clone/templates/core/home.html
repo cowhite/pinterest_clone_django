@@ -1,0 +1,31 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load core_tags %}
+
+{% block head_title %}{% trans "Home page" %}{% endblock %}
+
+{% block body_class %}homepage{% endblock %}
+
+{% block body %}
+
+<div id="pins">
+    {% for pin in pins %}
+        <div class="pin">
+            <div class="pin-content">
+                <img src="{{ pin.image.url }}"  />
+                <div class="desc"> {{ pin.description }} </div>
+                <div class="creator"> 
+                    <div class="created-by"> {{ pin.created_by }} </div> 
+                    <div class="created-board"> {{ pin.board }} </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block extra_script %}
+{% endblock %}
+
